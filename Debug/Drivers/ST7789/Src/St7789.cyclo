@@ -1,0 +1,14 @@
+../Drivers/ST7789/Src/St7789.c:14:6:St7789SetAddress	1
+../Drivers/ST7789/Src/St7789.c:29:19:St7789WriteCommand	1
+../Drivers/ST7789/Src/St7789.c:36:19:St7789WriteData	1
+../Drivers/ST7789/Src/St7789.c:43:6:HAL_SPI_TxCpltCallback	3
+../Drivers/ST7789/Src/St7789.c:51:6:St7789RstHardware	1
+../Drivers/ST7789/Src/St7789.c:58:6:St7789RstSoftware	1
+../Drivers/ST7789/Src/St7789.c:63:6:St7789SetInterfacePixelFormat	1
+../Drivers/ST7789/Src/St7789.c:71:6:St7789SetSleepMode	3
+../Drivers/ST7789/Src/St7789.c:83:6:St7789Init	3
+../Drivers/ST7789/Src/St7789.c:116:6:St7789SetMemoryDataAccessControl	7
+../Drivers/ST7789/Src/St7789.c:135:6:St7789SetColumnAddress	1
+../Drivers/ST7789/Src/St7789.c:139:6:St7789SetRowAddress	1
+../Drivers/ST7789/Src/St7789.c:143:6:St7789ConvertFor18bit	2
+../Drivers/ST7789/Src/St7789.c:150:6:St7789ConvertFor16bit	1

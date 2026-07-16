@@ -1,0 +1,17 @@
+../Core/Acquisition/Src/acquisition.c:20:6:AcquisittionSetSampleCount	1
+../Core/Acquisition/Src/acquisition.c:25:6:AcquisittionSetSamplePeriod	1
+../Core/Acquisition/Src/acquisition.c:30:6:AcquisittionSampleStop	1
+../Core/Acquisition/Src/acquisition.c:35:6:AcquisittionSampleStart	1
+../Core/Acquisition/Src/acquisition.c:44:6:AcquisittionStart	1
+../Core/Acquisition/Src/acquisition.c:49:6:HAL_ADC_ConvCpltCallback	3
+../Core/Acquisition/Src/acquisition.c:56:13:AcquisittionSetMsgEncoderChanged	1
+../Core/Acquisition/Src/acquisition.c:62:13:AcquisittionSendQueueFormIsr	2
+../Core/Acquisition/Src/acquisition.c:67:13:AcquisittionEncoderChangedValue	3
+../Core/Acquisition/Src/acquisition.c:81:13:AcquisittionReadSampleBlockFinish	3
+../Core/Acquisition/Src/acquisition.c:108:13:AcquisittionSetSampleMsg	1
+../Core/Acquisition/Src/acquisition.c:115:6:AcquisittionInit	1
+../Core/Acquisition/Src/acquisition.c:122:6:AcquisittionAllowMemory	2
+../Core/Acquisition/Src/acquisition.c:131:12:AcquisittionPushMsgQueueFree	1
+../Core/Acquisition/Src/acquisition.c:136:12:AcquisittionPopMsgQueueFree	1
+../Core/Acquisition/Src/acquisition.c:141:12:AcquisittionPushMsgQueueReady	1
+../Core/Acquisition/Src/acquisition.c:146:12:AcquisittionPopMsgQueueReady	1

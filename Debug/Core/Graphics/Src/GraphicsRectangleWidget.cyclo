@@ -1,0 +1,4 @@
+../Core/Graphics/Src/GraphicsRectangleWidget.c:7:19:GraphicsDrawRectangleWidget	1
+../Core/Graphics/Src/GraphicsRectangleWidget.c:10:6:GraphicsSetRectangleWidgetSize	1
+../Core/Graphics/Src/GraphicsRectangleWidget.c:13:6:GraphicsSetRectangleWidgetCoordinate	1
+../Core/Graphics/Src/GraphicsRectangleWidget.c:16:6:GraphicsSetRectangleWidgetColor	1
