@@ -7,13 +7,72 @@
 extern St7789VaribleLocal st7789config;
 
 //-------------------------------------------------------------------------------//
-
 static void St7789SetAreaTranfer(St7789Config *config, uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2);
-static HAL_StatusTypeDef GraphicsRectangleWigetTranfer(St7789Config *config, GraphicsRectangleConfig *rectangleConfig);
+static HAL_StatusTypeDef GraphicsRectangleTranfer(St7789Config *config, GraphicsRectangleConfig *rectangleConfig);
 static void St7789CalculatorTextDisplay(St7789Config *config, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, uint16_t *columnDisplay, uint16_t *rowDisplay);
 static HAL_StatusTypeDef GraphicsTranferText(St7789Config *config, GraphicsTextConfig *textConfig, St7789RgbColor *background, uint16_t columnDisplay, uint16_t rowDisplay);
 
 //-------------------------------------------------------------------------------//
+
+void GraphicsRectangleSetUp(GraphicsRectangleConfig *config, St7789RgbColor *color, uint16_t x, uint16_t y, uint16_t column, uint16_t row){
+	config->background = *color;
+	GraphicsSetCoordinate(&config->pos.coordinate, x, y);
+	GraphicsSetSize(&config->pos.size, column, row);
+}
+
+HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(St7789Config *config, GraphicsRectangleConfig *rec, GraphicsOutline *outline){
+	GraphicsRectangleConfig rectangle;
+	HAL_StatusTypeDef result = HAL_OK;
+	// Draw outline
+	// Draw outline top
+	GraphicsRectangleSetUp(
+		&rectangle,
+		&outline->color,
+		rec->pos.coordinate.x,
+		rec->pos.coordinate.y,
+		rec->pos.size.column,
+		outline->width
+	);
+
+	result |= GraphicsDrawRectangle(config, &rectangle);
+	// Draw outline bottom
+	GraphicsRectangleSetUp(
+		&rectangle,
+		&outline->color,
+		rec->pos.coordinate.x,
+		rec->pos.coordinate.y + rec->pos.size.row - outline->width,
+		rec->pos.size.column,
+		outline->width
+	);
+
+	result |= GraphicsDrawRectangle(config, &rectangle);
+
+	// Draw outline left
+	GraphicsRectangleSetUp(
+		&rectangle,
+		&outline->color,
+		rec->pos.coordinate.x,
+		rec->pos.coordinate.y,
+		outline->width,
+		rec->pos.size.row
+	);
+
+	result |= GraphicsDrawRectangle(config, &rectangle);
+
+	// Draw outline right
+
+	GraphicsRectangleSetUp(
+		&rectangle,
+		&outline->color,
+		rec->pos.coordinate.x + rec->pos.size.column - outline->width,
+		rec->pos.coordinate.y,
+		outline->width,
+		rec->pos.size.row
+	);
+
+	result |= GraphicsDrawRectangle(config, &rectangle);
+	return result;
+}
 
 void GraphicsSetSize(St7789Size *size, uint16_t column, uint16_t row){
 	size->column = column;
@@ -30,7 +89,7 @@ void GraphicsSetColor(St7789RgbColor *color, uint8_t red, uint8_t green, uint8_t
 	color->color[ST7789_BLUE_COLOR_DEFFAULT] = blue;
 }
 
-static HAL_StatusTypeDef GraphicsRectangleWigetTranfer(St7789Config *config, GraphicsRectangleConfig *rectangleConfig){
+static HAL_StatusTypeDef GraphicsRectangleTranfer(St7789Config *config, GraphicsRectangleConfig *rectangleConfig){
 	uint32_t start = 0;
 	uint32_t pixelNeedTranfer = rectangleConfig->pos.size.column * rectangleConfig->pos.size.row ;
 
@@ -64,8 +123,55 @@ static HAL_StatusTypeDef GraphicsRectangleWigetTranfer(St7789Config *config, Gra
 	return HAL_OK;
 }
 
+static HAL_StatusTypeDef GraphiscsSetAlignment(St7789Config *config, GraphicsAlignment alignment, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, uint16_t *column, uint16_t *row){
+	uint16_t x, y;
+	switch (alignment) {
+		case GRAPHICS_ALIGNMENT_TOP_LEFT:
+			x = GRAPHICS_LEFT(region->size.column, *column);
+			y = GRAPHICS_LEFT(region->size.row, *row);
+			break;
+		case GRAPHICS_ALIGNMENT_TOP_CENTER:
+			x = GRAPHICS_CENTER(region->size.column, *column);
+			y = GRAPHICS_LEFT(region->size.row, *row);
+			break;
+		case GRAPHICS_ALIGNMENT_TOP_RIGHT:
+			x = GRAPHICS_RIGHT(region->size.column, *column);
+			y = GRAPHICS_LEFT(region->size.row, *row);
+			break;
+		case GRAPHICS_ALIGNMENT_MIDDLE_LEFT:
+			x = GRAPHICS_LEFT(region->size.column, *column);
+			y = GRAPHICS_CENTER(region->size.row, *row);
+			break;
+		case GRAPHICS_ALIGNMENT_CENTER:
+			x = GRAPHICS_CENTER(region->size.column, *column);
+			y = GRAPHICS_CENTER(region->size.row, *row);
+			break;
+		case GRAPHICS_ALIGNMENT_MIDDLE_RIGHT:
+			x = GRAPHICS_RIGHT(region->size.column, *column);
+			y = GRAPHICS_CENTER(region->size.row, *row);
+			break;
+		case GRAPHICS_ALIGNMENT_BOTTOM_LEFT:
+			x = GRAPHICS_LEFT(region->size.column, *column);
+			y = GRAPHICS_RIGHT(region->size.row, *row);
+			break;
+		case GRAPHICS_ALIGNMENT_BOTTOM_CENTER:
+			x = GRAPHICS_CENTER(region->size.column, *column);
+			y = GRAPHICS_RIGHT(region->size.row, *row);
+			break;
+		case GRAPHICS_ALIGNMENT_BOTTOM_RIGHT:
+			x = GRAPHICS_RIGHT(region->size.column, *column);
+			y = GRAPHICS_RIGHT(region->size.row, *row);
+			break;
+		default:
+			return HAL_ERROR;
+	}
+	x += region->coordinate.x;
+	y += region->coordinate.y;
+	St7789SetAreaTranfer( config, x, x + *column, y, y + *row);
+	return HAL_OK;
+}
 
-HAL_StatusTypeDef GraphicsDrawText(St7789Config *config, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, St7789RgbColor *background){
+HAL_StatusTypeDef GraphicsDrawText(St7789Config *config, GraphicsAlignment alignment, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, St7789RgbColor *background){
 	if(textConfig->font.fontPixel < GRAPHICS_TEXT_FONT_SIZE_MIN)
 		return HAL_ERROR;
 	st7789config.task = xTaskGetCurrentTaskHandle();
@@ -80,13 +186,7 @@ HAL_StatusTypeDef GraphicsDrawText(St7789Config *config, GraphicsTextConfig *tex
 	if(rowDisplay == 0 || columnDisplay == 0)
 		return HAL_ERROR;
 
-	St7789SetAreaTranfer(
-		config,
-		region->coordinate.x,
-		region->coordinate.x + columnDisplay,
-		region->coordinate.y,
-		region->coordinate.y + rowDisplay
-	);
+	GraphiscsSetAlignment(config, alignment, textConfig, region, &columnDisplay, &rowDisplay);
 
 	HAL_StatusTypeDef status = GraphicsTranferText(config, textConfig, background, columnDisplay, rowDisplay);
 	if(status != HAL_OK)
@@ -105,7 +205,7 @@ HAL_StatusTypeDef GraphicsDrawRectangle(St7789Config *config, GraphicsRectangleC
 		rectangleConfig->pos.coordinate.y,
 		rectangleConfig->pos.coordinate.y + rectangleConfig->pos.size.row
 	);
-	return GraphicsRectangleWigetTranfer(config, rectangleConfig);
+	return GraphicsRectangleTranfer(config, rectangleConfig);
 }
 
 static void St7789SetAreaTranfer(St7789Config *config, uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2){

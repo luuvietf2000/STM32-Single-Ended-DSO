@@ -1,9 +1,0 @@
-../Core/Graphics/Src/Graphics.c:18:6:GraphicsSetSize	1
-../Core/Graphics/Src/Graphics.c:22:6:GraphicsSetCoordinate	1
-../Core/Graphics/Src/Graphics.c:27:6:GraphicsSetColor	1
-../Core/Graphics/Src/Graphics.c:33:26:GraphicsRectangleWigetTranfer	6
-../Core/Graphics/Src/Graphics.c:68:19:GraphicsDrawText	5
-../Core/Graphics/Src/Graphics.c:99:19:GraphicsDrawRectangle	1
-../Core/Graphics/Src/Graphics.c:111:13:St7789SetAreaTranfer	1
-../Core/Graphics/Src/Graphics.c:117:13:St7789CalculatorTextDisplay	3
-../Core/Graphics/Src/Graphics.c:133:26:GraphicsTranferText	10

@@ -6,9 +6,10 @@
 //--------------------------------------------------------------------------------//
 
 typedef struct{
-	GraphicsRegionWidgetConfig region;
-	St7789RgbColor background;
+	GraphicsRectangleConfig background;
+	GraphicsOutline outline;
 	GraphicsTextConfig textConfig;
+	GraphicsAlignment aligment;
 } GraphicsTextWidgetConfig;
 
 //--------------------------------------------------------------------------------//

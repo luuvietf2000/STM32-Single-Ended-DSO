@@ -431,7 +431,7 @@ static void St7789_Config(St7789Config *config) {
 	config->size = (St7789Size) {ST7789_COLUMN_SIZE, ST7789_ROW_SIZE};
 	config->format = CONTROL_INTERFACE_FORMAT_16BIT;
 	config->rst = (St7789Gpio) {GPIOC, RST_Pin};
-	config->rotate = ST7789_DISPLAY_NORMAL;
+	config->rotate = ST7789_DISPLAY_RIGHT;
 	St7789Init(config, ST7789_DMA_MEMORY_SIZE);
 }
 
@@ -502,27 +502,39 @@ void UiHandleCallback(void *argument)
 	backgroud.background.color[0] = 0;
 	backgroud.background.color[1] = 255;
 	backgroud.background.color[2] = 0;
-	backgroud.pos.size = (St7789Size) {240, 320};
+	backgroud.pos.size = (St7789Size) {320, 240};
 	backgroud.pos.coordinate = (St7789Coordinate) {0, 0};
 	GraphicsDrawRectangle(&tft7789, &backgroud);
 
+	GraphicsRectangleWidgetConfig box;
+	box.rectangle.background.color[0] = 128;
+	box.rectangle.background.color[1] = 255;
+	box.rectangle.background.color[2] = 0;
+	box.rectangle.pos.size = (St7789Size) {160, 120};
+	box.rectangle.pos.coordinate = (St7789Coordinate) {80, 60};
+	box.outline.width = 5;
+	box.outline.color.color[0] = 0;
+	box.outline.color.color[1] = 0;
+	box.outline.color.color[2] = 255;
+	GraphicsDrawRectangleWidget(&tft7789, &box);
+
 	GraphicsTextWidgetConfig textWidget;
-
-	textWidget.region.coordinate.x = 0;
-	textWidget.region.coordinate.y = 0;
-	textWidget.region.size.column = 240;
-	textWidget.region.size.row = 320;
-
-	textWidget.background.color[0] = 0x00;
-	textWidget.background.color[1] = 0x00;
-	textWidget.background.color[2] = 0x00;
-
-	textWidget.textConfig.font.fontPixel = 1;
-	textWidget.textConfig.font.fontColor.color[0] = 0xFF;
-	textWidget.textConfig.font.fontColor.color[1] = 0x00;
-	textWidget.textConfig.font.fontColor.color[2] = 0x00;
-
-	strcpy(textWidget.textConfig.content, "Hello ST7789!");
+	char content[] = "Hello ST7789!";
+	textWidget.aligment = GRAPHICS_ALIGNMENT_CENTER;
+	textWidget.background.background.color[0] = 128;
+	textWidget.background.background.color[1] = 255;
+	textWidget.background.background.color[2] = 0;
+	textWidget.background.pos.coordinate = (St7789Coordinate) {0, 0};
+	textWidget.background.pos.size = (St7789Size) {320, 240};
+	textWidget.outline.width = 5;
+	textWidget.outline.color.color[0] = 0xF2;
+	textWidget.outline.color.color[1] = 0xF2;
+	textWidget.outline.color.color[2] = 0xF2;
+	textWidget.textConfig.font.fontColor.color[0] = 0;
+	textWidget.textConfig.font.fontColor.color[1] = 0;
+	textWidget.textConfig.font.fontColor.color[2] = 0;
+	textWidget.textConfig.font.fontPixel = 10;
+	textWidget.textConfig.content = content;
 	GraphicsDrawTextWidget(&tft7789, &textWidget);
 	for (;;) {
 		osDelay(1000);
