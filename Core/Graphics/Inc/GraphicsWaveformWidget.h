@@ -9,11 +9,13 @@ typedef struct{
 } GraphicsLineSet;
 
 typedef struct{
-	St7789RgbColor background;
-	GraphicsRectangleConfig outline;
+	GraphicsRectangleWidgetConfig background;
 	GraphicsLineSet lineSet;
+	GraphicsLineSet waveformPoints;
 } GraphicsWaveformWidgetConfig;
 
+void GraphicsWaveformInit(GraphicsWaveformWidgetConfig *waveform, uint16_t pointLenght);
+HAL_StatusTypeDef GraphicsWaveformDraw(St7789Config *config, GraphicsWaveformWidgetConfig *waveform);
 
 
 #endif /* GRAPHICS_INC_GRAPHICSWAVEFORMWIDGET_H_ */

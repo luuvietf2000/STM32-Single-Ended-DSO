@@ -41,7 +41,7 @@
 #define ST7789_COLUMN_SIZE													240
 #define ST7789_ROW_SIZE														320
 #define ST7789_DMA_MEMORY_SIZE												720
-#define LVGL_BUFFER_SIZE													(320 * 10)
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -498,26 +498,19 @@ void UiHandleCallback(void *argument)
   /* USER CODE BEGIN UiHandleCallback */
 	/* Infinite loop */
 	St7789_Config(&tft7789);
-	GraphicsRectangleConfig backgroud;
-	backgroud.background.color[0] = 0;
-	backgroud.background.color[1] = 255;
-	backgroud.background.color[2] = 0;
-	backgroud.pos.size = (St7789Size) {320, 240};
-	backgroud.pos.coordinate = (St7789Coordinate) {0, 0};
-	GraphicsDrawRectangle(&tft7789, &backgroud);
-
 	GraphicsRectangleWidgetConfig box;
-	box.rectangle.background.color[0] = 128;
-	box.rectangle.background.color[1] = 255;
-	box.rectangle.background.color[2] = 0;
-	box.rectangle.pos.size = (St7789Size) {160, 120};
-	box.rectangle.pos.coordinate = (St7789Coordinate) {80, 60};
+	box.rectangle.background.color[0] = 16;
+	box.rectangle.background.color[1] = 16;
+	box.rectangle.background.color[2] = 24;
+	box.rectangle.pos.size = (St7789Size) {320, 240};
+	box.rectangle.pos.coordinate = (St7789Coordinate) {0, 0};
 	box.outline.width = 5;
 	box.outline.color.color[0] = 0;
 	box.outline.color.color[1] = 0;
 	box.outline.color.color[2] = 255;
 	GraphicsDrawRectangleWidget(&tft7789, &box);
 
+	/*
 	GraphicsTextWidgetConfig textWidget;
 	char content[] = "Hello ST7789!";
 	textWidget.aligment = GRAPHICS_ALIGNMENT_CENTER;
@@ -536,6 +529,8 @@ void UiHandleCallback(void *argument)
 	textWidget.textConfig.font.fontPixel = 10;
 	textWidget.textConfig.content = content;
 	GraphicsDrawTextWidget(&tft7789, &textWidget);
+	*/
+
 	for (;;) {
 		osDelay(1000);
 	}

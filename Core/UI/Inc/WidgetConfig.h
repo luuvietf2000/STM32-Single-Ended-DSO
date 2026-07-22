@@ -1,0 +1,400 @@
+#ifndef UI_INC_WIDGETCONFIG_H_
+#define UI_INC_WIDGETCONFIG_H_
+
+#include "GraphicsRectangleWidget.h"
+#include "GraphicsTextWidget.h"
+#include "GraphicsWaveformWidget.h"
+
+
+//----------------------------------------------------------------------------------------------------//
+#define MAIN_SCREEN_WIDTH										320
+#define MAIN_SCREEN_HEIGHT										240
+//---------------------------------------------------------------------/
+#define MAIN_SCREEN_INFORMATION_DSO_WIDTH						320
+#define MAIN_SCREEN_INFORMATION_DSO_HEIGHT						(MAIN_SCREEN_HEIGHT - MAIN_SCREEN_WAVEFORM_HEIGHT)
+//---------------------------------------------------------------------/
+#define MAIN_SCREEN_WAVEFORM_OUTLINE_WIDTH						2
+#define MAIN_SCREEN_WAVEFORM_OUTLINE_COLOR						{0x00, 0x00, 0x128}
+#define MAIN_SCREEN_WAVEFORM_CONTENT_WIDTH						300
+#define MAIN_SCREEN_WAVEFORM_CONTENT_HEIGHT						200
+#define MAIN_SCREEN_WAVEFORM_WIDTH								(MAIN_SCREEN_WAVEFORM_CONTENT_WIDTH + 2 * MAIN_SCRREEN_OUTLINE_WIDTH)
+#define MAIN_SCREEN_WAVEFORM_HEIGHT								(MAIN_SCREEN_WAVEFORM_CONTENT_HEIGHT + 2 * MAIN_SCRREEN_OUTLINE_WIDTH)
+#define MAIN_SCREEN_WAVEFORM_X									MAIN_SCREEN_TEXT_MIN_WAVEFORM_WIDTH
+#define MAIN_SCREEN_WAVEFORM_Y									MAIN_SCREEN_INFORMATION_DSO_HEIGHT
+#define MAIN_SCREEN_WAVEFORM_BACKGROUND							{0x00, 0x00, 0x00}
+#define MAIN_SCREEN_DEVISION_PIXEL								10
+#define MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(x)					(x * MAIN_SCREEN_DEVISION_PIXEL + MAIN_SCREEN_WAVEFORM_X)
+#define MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y						(MAIN_SCREEN_WAVEFORM_Y + MAIN_SCREEN_WAVEFORM_OUTLINE_WIDTH + MAIN_SCREEN_WAVEFORM_OUTLINE_WIDTH)
+#define MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT				MAIN_SCREEN_WAVEFORM_CONTENT_HEIGHT
+#define MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH					1
+#define MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X					(MAIN_SCREEN_WAVEFORM_X + MAIN_SCREEN_WAVEFORM_OUTLINE_WIDTH + MAIN_SCREEN_WAVEFORM_OUTLINE_WIDTH)
+#define MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(y)				(y * MAIN_SCREEN_DEVISION_PIXEL + MAIN_SCREEN_WAVEFORM_Y)
+#define MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH				MAIN_SCREEN_WAVEFORM_CONTENT_WIDTH
+#define MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT				1
+#define MAIN_SCREEN_WAVEFORM_LINE_SET							{0xF2, 0xF2, 0xF2}
+//---------------------------------------------------------------------/
+#define MAIN_SCREEN_TEXT_MIN_WAVEFORM_WIDTH						(MAIN_SCREEN_WIDTH - MAIN_SCREEN_WAVEFORM_WIDTH)
+#define MAIN_SCREEN_TEXT_MIN_WAVEFORM_HEIGHT					(MAIN_SCREEN_WAVEFORM_HEIGHT)
+#define MAIN_SCRREN_TEXT_MIN_WAVEFORM_ALIGNMENT					GRAPHICS_ALIGNMENT_BOTTOM_RIGHT
+//----------------------------------------------------------------------------------------------------//
+
+static const GraphicsRectangleConfig waveformGridLines[] = {
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(1), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(2), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(3), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(4), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(5), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(6), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(7), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(8), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(9), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(10), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(11), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(12), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(13), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(14), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(15), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(16), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(17), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(18), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(19), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(20), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(21), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(22), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(23), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(24), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(25), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(26), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(27), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(28), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_X(29), MAIN_SCRREN_WAVEFORM_VETICAL_LINE_Y },
+            .size = { MAIN_SCRREN_WAVEFORM_VETICAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_VETICAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(1) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(2) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(3) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(4) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(5) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(6) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(7) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(8) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(9) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(10) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(11) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(12) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(13) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(14) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(15) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(16) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(17) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(18) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+    {
+        .background = MAIN_SCREEN_WAVEFORM_LINE_SET,
+        .pos = {
+            .coordinate = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_X, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_Y(19) },
+            .size = { MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_WIDTH, MAIN_SCRREN_WAVEFORM_HORIZONTAL_LINE_HEIGHT }
+        }
+    },
+};
+
+GraphicsWaveformWidgetConfig waveform = {
+    .background = {
+        .rectangle = {
+        	.pos = {
+        		.size = {MAIN_SCREEN_WAVEFORM_WIDTH, MAIN_SCREEN_WAVEFORM_HEIGHT},
+        		.coordinate = {MAIN_SCREEN_WAVEFORM_X, MAIN_SCREEN_WAVEFORM_Y}
+        	},
+			.background = MAIN_SCREEN_WAVEFORM_BACKGROUND
+        },
+        .outline = {
+        	.color = MAIN_SCREEN_WAVEFORM_OUTLINE_COLOR,
+			.width = MAIN_SCREEN_WAVEFORM_OUTLINE_WIDTH
+        },
+    },
+	.lineSet = {
+			.lines = waveformGridLines,
+			.count = sizeof(waveformGridLines) / sizeof(waveformGridLines[0])
+	}
+};
+
+#endif /* UI_INC_WIDGETCONFIG_H_ */
