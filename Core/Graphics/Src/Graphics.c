@@ -5,12 +5,13 @@
 //-------------------------------------------------------------------------------//
 
 extern St7789VaribleLocal st7789config;
+extern St7789Config *config;
 
 //-------------------------------------------------------------------------------//
-static void St7789SetAreaTranfer(St7789Config *config, uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2);
-static HAL_StatusTypeDef GraphicsRectangleTranfer(St7789Config *config, GraphicsRectangleConfig *rectangleConfig);
-static void St7789CalculatorTextDisplay(St7789Config *config, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, uint16_t *columnDisplay, uint16_t *rowDisplay);
-static HAL_StatusTypeDef GraphicsTranferText(St7789Config *config, GraphicsTextConfig *textConfig, St7789RgbColor *background, uint16_t columnDisplay, uint16_t rowDisplay);
+static void St7789SetAreaTranfer(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2);
+static HAL_StatusTypeDef GraphicsRectangleTranfer(GraphicsRectangleConfig *rectangleConfig);
+static void St7789CalculatorTextDisplay(GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, uint16_t *columnDisplay, uint16_t *rowDisplay);
+static HAL_StatusTypeDef GraphicsTranferText(GraphicsTextConfig *textConfig, St7789RgbColor *background, uint16_t columnDisplay, uint16_t rowDisplay);
 
 //-------------------------------------------------------------------------------//
 
@@ -20,7 +21,7 @@ void GraphicsRectangleSetUp(GraphicsRectangleConfig *config, St7789RgbColor *col
 	GraphicsSetSize(&config->pos.size, column, row);
 }
 
-HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(St7789Config *config, GraphicsRectangleConfig *rec, GraphicsOutline *outline){
+HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(GraphicsRectangleConfig *rec, GraphicsOutline *outline){
 	GraphicsRectangleConfig rectangle;
 	HAL_StatusTypeDef result = HAL_OK;
 	// Draw outline
@@ -34,7 +35,7 @@ HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(St7789Config *config, Graph
 		outline->width
 	);
 
-	result |= GraphicsDrawRectangle(config, &rectangle);
+	result |= GraphicsDrawRectangle(&rectangle);
 	// Draw outline bottom
 	GraphicsRectangleSetUp(
 		&rectangle,
@@ -45,7 +46,7 @@ HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(St7789Config *config, Graph
 		outline->width
 	);
 
-	result |= GraphicsDrawRectangle(config, &rectangle);
+	result |= GraphicsDrawRectangle(&rectangle);
 
 	// Draw outline left
 	GraphicsRectangleSetUp(
@@ -57,7 +58,7 @@ HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(St7789Config *config, Graph
 		rec->pos.size.row
 	);
 
-	result |= GraphicsDrawRectangle(config, &rectangle);
+	result |= GraphicsDrawRectangle(&rectangle);
 
 	// Draw outline right
 
@@ -70,7 +71,7 @@ HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(St7789Config *config, Graph
 		rec->pos.size.row
 	);
 
-	result |= GraphicsDrawRectangle(config, &rectangle);
+	result |= GraphicsDrawRectangle(&rectangle);
 	return result;
 }
 
@@ -89,7 +90,7 @@ void GraphicsSetColor(St7789RgbColor *color, uint8_t red, uint8_t green, uint8_t
 	color->color[ST7789_BLUE_COLOR_DEFFAULT] = blue;
 }
 
-static HAL_StatusTypeDef GraphicsRectangleTranfer(St7789Config *config, GraphicsRectangleConfig *rectangleConfig){
+static HAL_StatusTypeDef GraphicsRectangleTranfer(GraphicsRectangleConfig *rectangleConfig){
 	uint32_t start = 0;
 	uint32_t pixelNeedTranfer = rectangleConfig->pos.size.column * rectangleConfig->pos.size.row ;
 
@@ -106,7 +107,6 @@ static HAL_StatusTypeDef GraphicsRectangleTranfer(St7789Config *config, Graphics
 		default:
 			return HAL_ERROR;
 			break;
-
 	}
 	for(uint32_t i = st7789config.pixelWidth; i < memorySize * st7789config.pixelWidth; i += st7789config.pixelWidth)
 		memcpy(st7789config.dma.ptr + i, st7789config.dma.ptr, st7789config.pixelWidth);
@@ -114,7 +114,7 @@ static HAL_StatusTypeDef GraphicsRectangleTranfer(St7789Config *config, Graphics
 	uint32_t pixelSend;
 	while(start < pixelNeedTranfer){
 		pixelSend = pixelNeedTranfer - start >= memorySize ? memorySize : pixelNeedTranfer - start;
-		status = St7789WriteData(config, st7789config.dma.ptr, pixelSend * st7789config.pixelWidth);
+		status = St7789WriteData(st7789config.dma.ptr, pixelSend * st7789config.pixelWidth);
 		if(status == HAL_OK)
 			start += pixelSend;
 		else
@@ -123,7 +123,7 @@ static HAL_StatusTypeDef GraphicsRectangleTranfer(St7789Config *config, Graphics
 	return HAL_OK;
 }
 
-static HAL_StatusTypeDef GraphiscsSetAlignment(St7789Config *config, GraphicsAlignment alignment, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, uint16_t *column, uint16_t *row){
+static HAL_StatusTypeDef GraphiscsSetAlignment(GraphicsAlignment alignment, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, uint16_t *column, uint16_t *row){
 	uint16_t x, y;
 	switch (alignment) {
 		case GRAPHICS_ALIGNMENT_TOP_LEFT:
@@ -167,17 +167,16 @@ static HAL_StatusTypeDef GraphiscsSetAlignment(St7789Config *config, GraphicsAli
 	}
 	x += region->coordinate.x;
 	y += region->coordinate.y;
-	St7789SetAreaTranfer( config, x, x + *column, y, y + *row);
+	St7789SetAreaTranfer(x, x + *column, y, y + *row);
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef GraphicsDrawText(St7789Config *config, GraphicsAlignment alignment, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, St7789RgbColor *background){
+HAL_StatusTypeDef GraphicsDrawText(GraphicsAlignment alignment, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, St7789RgbColor *background){
 	if(textConfig->font.fontPixel < GRAPHICS_TEXT_FONT_SIZE_MIN)
 		return HAL_ERROR;
 	st7789config.task = xTaskGetCurrentTaskHandle();
 	uint16_t columnDisplay, rowDisplay;
 	St7789CalculatorTextDisplay(
-		config,
 		textConfig,
 		region,
 		&columnDisplay,
@@ -186,9 +185,9 @@ HAL_StatusTypeDef GraphicsDrawText(St7789Config *config, GraphicsAlignment align
 	if(rowDisplay == 0 || columnDisplay == 0)
 		return HAL_ERROR;
 
-	GraphiscsSetAlignment(config, alignment, textConfig, region, &columnDisplay, &rowDisplay);
+	GraphiscsSetAlignment(alignment, textConfig, region, &columnDisplay, &rowDisplay);
 
-	HAL_StatusTypeDef status = GraphicsTranferText(config, textConfig, background, columnDisplay, rowDisplay);
+	HAL_StatusTypeDef status = GraphicsTranferText(textConfig, background, columnDisplay, rowDisplay);
 	if(status != HAL_OK)
 		return status;
 	textConfig->areaDisplay.column = columnDisplay;
@@ -196,25 +195,24 @@ HAL_StatusTypeDef GraphicsDrawText(St7789Config *config, GraphicsAlignment align
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef GraphicsDrawRectangle(St7789Config *config, GraphicsRectangleConfig *rectangleConfig){
+HAL_StatusTypeDef GraphicsDrawRectangle(GraphicsRectangleConfig *rectangleConfig){
 	st7789config.task = xTaskGetCurrentTaskHandle();
 	St7789SetAreaTranfer(
-		config,
 		rectangleConfig->pos.coordinate.x,
 		rectangleConfig->pos.coordinate.x + rectangleConfig->pos.size.column,
 		rectangleConfig->pos.coordinate.y,
 		rectangleConfig->pos.coordinate.y + rectangleConfig->pos.size.row
 	);
-	return GraphicsRectangleTranfer(config, rectangleConfig);
+	return GraphicsRectangleTranfer(rectangleConfig);
 }
 
-static void St7789SetAreaTranfer(St7789Config *config, uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2){
-	St7789SetColumnAddress(config, x1, x2);
-	St7789SetRowAddress(config, y1, y2);
-	St7789WriteCommand(config, ST7789_CMD_RAMWR);
+static void St7789SetAreaTranfer(uint16_t x1, uint16_t x2, uint16_t y1, uint16_t y2){
+	St7789SetColumnAddress(x1, x2);
+	St7789SetRowAddress(y1, y2);
+	St7789WriteCommand(ST7789_CMD_RAMWR);
 }
 
-static void St7789CalculatorTextDisplay(St7789Config *config, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, uint16_t *columnDisplay, uint16_t *rowDisplay){
+static void St7789CalculatorTextDisplay(GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, uint16_t *columnDisplay, uint16_t *rowDisplay){
 	uint8_t length = strlen(textConfig->content);
 
 	// Get length char display max
@@ -230,7 +228,7 @@ static void St7789CalculatorTextDisplay(St7789Config *config, GraphicsTextConfig
 	*rowDisplay = (GRAPHICS_TEXT_ROW_SIZE_DEFFAULT * textConfig->font.fontPixel);
 }
 
-static HAL_StatusTypeDef GraphicsTranferText(St7789Config *config, GraphicsTextConfig *textConfig, St7789RgbColor *background, uint16_t columnDisplay, uint16_t rowDisplay){
+static HAL_StatusTypeDef GraphicsTranferText(GraphicsTextConfig *textConfig, St7789RgbColor *background, uint16_t columnDisplay, uint16_t rowDisplay){
 	uint8_t *ptrTarget = NULL;
 	uint16_t indexMemDma = 0;
 	HAL_StatusTypeDef status;
@@ -285,7 +283,7 @@ static HAL_StatusTypeDef GraphicsTranferText(St7789Config *config, GraphicsTextC
 			column += textConfig->font.fontPixel - 1;
 		}
 		for(uint16_t i = 0; i < textConfig->font.fontPixel; i++){
-			status = St7789WriteData(config, st7789config.dma.ptr, indexMemDma);
+			status = St7789WriteData(st7789config.dma.ptr, indexMemDma);
 			if(status != HAL_OK)
 				return status;
 		}

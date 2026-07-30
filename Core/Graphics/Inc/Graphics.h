@@ -5,7 +5,6 @@
 #include "AsciiDeffaultFont.h"
 
 //-------------------------------------------------------------------------------//
-
 #define GRAPHICS_TEXT_FONT_SIZE_MIN											1
 #define GRAPHICS_PIXEL_SPACE												1
 #define GRAPHICS_TEXT_COLUMN_SIZE_DEFFAULT									(FONT_DEFFAULT_COLUMN + GRAPHICS_PIXEL_SPACE)
@@ -56,12 +55,12 @@ typedef struct{
 } GraphicsRectangleConfig;
 
 //-------------------------------------------------------------------------------//
-
-HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(St7789Config *config, GraphicsRectangleConfig *rec, GraphicsOutline *outline);
+void GraphicsInit(St7789Config *_config);
+HAL_StatusTypeDef GraphicsDrawRectangleWidgetOutline(GraphicsRectangleConfig *rec, GraphicsOutline *outline);
 void GraphicsSetSize(St7789Size *size, uint16_t column, uint16_t row);
 void GraphicsSetCoordinate(St7789Coordinate *coordinate, uint16_t x, uint16_t y);
 void GraphicsSetColor(St7789RgbColor *color, uint8_t red, uint8_t green, uint8_t blue);
-HAL_StatusTypeDef GraphicsDrawText(St7789Config *config, GraphicsAlignment alignment, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, St7789RgbColor *background);
-HAL_StatusTypeDef GraphicsDrawRectangle(St7789Config *config, GraphicsRectangleConfig *rectangleConfig);
+HAL_StatusTypeDef GraphicsDrawText(GraphicsAlignment alignment, GraphicsTextConfig *textConfig, GraphicsRegionWidgetConfig *region, St7789RgbColor *background);
+HAL_StatusTypeDef GraphicsDrawRectangle(GraphicsRectangleConfig *rectangleConfig);
 void GraphicsRectangleSetUp(GraphicsRectangleConfig *config, St7789RgbColor *color, uint16_t x, uint16_t y, uint16_t column, uint16_t row);
 #endif /* GRAPHICS_INC_GRAPHICS_H_ */

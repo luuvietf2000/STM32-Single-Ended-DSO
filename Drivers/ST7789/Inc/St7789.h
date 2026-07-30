@@ -57,11 +57,13 @@
 #define ST7789_RGB_COLOR_MODE_16_BIT_RED_SHIFT								3
 #define ST7789_RGB_COLOR_MODE_16_BIT_RED_MASK								0x0F
 
-#define ST7789_RGB_COLOR_MODE_16_BIT_GREEN_SHIFT_PART_HIGH					0
-#define ST7789_RGB_COLOR_MODE_16_BIT_GREEN_MASK_PART_HIGH					0x56
+#define ST7789_RGB_COLOR_MODE_16_BIT_GREEN_SHIFT_PART_HIGH					3
+#define ST7789_RGB_COLOR_MODE_16_BIT_GREEN_MASK_PART_HIGH					0x07
 
-#define ST7789_RGB_COLOR_MODE_16_BIT_GREEN_SHIFT_PART_LOW					5
+#define ST7789_RGB_COLOR_MODE_16_BIT_GREEN_SHIFT_PART_LOW					0
 #define ST7789_RGB_COLOR_MODE_16_BIT_GREEN_MASK_PART_LOW					0x07
+
+#define ST7789_RGB_COLOR_MODE_16_BIT_GREEN_SHIFT_BYTE_LOW					5
 
 #define ST7789_RGB_COLOR_MODE_16_BIT_BLUE_SHIFT								0
 #define ST7789_RGB_COLOR_MODE_16_BIT_RED_MASK								0x0F
@@ -141,17 +143,17 @@ typedef struct{
 } St7789VaribleLocal;
 
 //---------------------------------------------------------------------------------//
-HAL_StatusTypeDef St7789WriteData(St7789Config *config, uint8_t *data, uint32_t size);
-HAL_StatusTypeDef St7789WriteCommand(St7789Config *config, uint8_t command);
-void St7789SetAddress(St7789Config *config, uint8_t cmd, uint16_t start, uint16_t end);
+HAL_StatusTypeDef St7789WriteData(uint8_t *data, uint32_t size);
+HAL_StatusTypeDef St7789WriteCommand(uint8_t command);
+void St7789SetAddress(uint8_t cmd, uint16_t start, uint16_t end);
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi);
-void St7789RstHardware(St7789Config *config);
-void St7789RstSoftware(St7789Config *config);
-void St7789SetInterfacePixelFormat(St7789Config *config, St7789ControlInterfaceColorFormat control, St7789RgbInterfaceColorFormat rgb);
-void St7789Init(St7789Config *config, uint32_t memorySize);
-void St7789SetMemoryDataAccessControl(St7789Config *config);
-void St7789SetRowAddress(St7789Config *config, uint16_t start, uint16_t end);
-void St7789SetColumnAddress(St7789Config *config, uint16_t start, uint16_t end);
+void St7789RstHardware();
+void St7789RstSoftware();
+void St7789SetInterfacePixelFormat(St7789ControlInterfaceColorFormat control, St7789RgbInterfaceColorFormat rgb);
+void St7789Init(St7789Config *_config, uint32_t memorySize);
+void St7789SetMemoryDataAccessControl();
+void St7789SetRowAddress(uint16_t start, uint16_t end);
+void St7789SetColumnAddress(uint16_t start, uint16_t end);
 void St7789ConvertFor18bit(uint8_t *ptr, St7789RgbColor *rgb, const uint8_t *shift);
 void St7789ConvertFor16bit(uint8_t *ptr, St7789RgbColor *rgb);
 

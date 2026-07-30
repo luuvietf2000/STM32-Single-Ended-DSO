@@ -2,20 +2,20 @@
 #include <string.h>
 
 //--------------------------------------------------------------------------------//
-static HAL_StatusTypeDef GraphicsDrawRectangleWidgetInterior(St7789Config *config, GraphicsRectangleWidgetConfig *rectangleConfig);
+static HAL_StatusTypeDef GraphicsDrawRectangleWidgetInterior(GraphicsRectangleWidgetConfig *rectangleConfig);
 //--------------------------------------------------------------------------------//
 
-HAL_StatusTypeDef GraphicsDrawRectangleWidget(St7789Config *config, GraphicsRectangleWidgetConfig *rectangleConfig){
+HAL_StatusTypeDef GraphicsDrawRectangleWidget(GraphicsRectangleWidgetConfig *rectangleConfig){
 	//--------------------------------------------------------------------------------//
 	// Draw if not outline
 	if(rectangleConfig->outline.width == 0){
-		return GraphicsDrawRectangle(config, &rectangleConfig->rectangle);
+		return GraphicsDrawRectangle(&rectangleConfig->rectangle);
 	}
-	return GraphicsDrawRectangleWidgetInterior(config, rectangleConfig)
-			|| GraphicsDrawRectangleWidgetOutline(config, &rectangleConfig->rectangle, &rectangleConfig->outline);
+	return GraphicsDrawRectangleWidgetInterior(rectangleConfig)
+			|| GraphicsDrawRectangleWidgetOutline(&rectangleConfig->rectangle, &rectangleConfig->outline);
 }
 
-static HAL_StatusTypeDef GraphicsDrawRectangleWidgetInterior(St7789Config *config, GraphicsRectangleWidgetConfig *rectangleConfig){
+static HAL_StatusTypeDef GraphicsDrawRectangleWidgetInterior(GraphicsRectangleWidgetConfig *rectangleConfig){
 	GraphicsRectangleConfig rectangle;
 	GraphicsRectangleSetUp(
 		&rectangle,
@@ -26,7 +26,7 @@ static HAL_StatusTypeDef GraphicsDrawRectangleWidgetInterior(St7789Config *confi
 		rectangleConfig->rectangle.pos.size.row - 2 * rectangleConfig->outline.width
 	);
 
-	return GraphicsDrawRectangle(config, &rectangle);
+	return GraphicsDrawRectangle(&rectangle);
 }
 
 

@@ -27,8 +27,7 @@
 #include "acquisition.h"
 #include "FreeRTOS.h"
 #include "queue.h"
-#include "GraphicsRectangleWidget.h"
-#include "GraphicsTextWidget.h"
+#include "MainScreen.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -498,38 +497,7 @@ void UiHandleCallback(void *argument)
   /* USER CODE BEGIN UiHandleCallback */
 	/* Infinite loop */
 	St7789_Config(&tft7789);
-	GraphicsRectangleWidgetConfig box;
-	box.rectangle.background.color[0] = 16;
-	box.rectangle.background.color[1] = 16;
-	box.rectangle.background.color[2] = 24;
-	box.rectangle.pos.size = (St7789Size) {320, 240};
-	box.rectangle.pos.coordinate = (St7789Coordinate) {0, 0};
-	box.outline.width = 5;
-	box.outline.color.color[0] = 0;
-	box.outline.color.color[1] = 0;
-	box.outline.color.color[2] = 255;
-	GraphicsDrawRectangleWidget(&tft7789, &box);
-
-	/*
-	GraphicsTextWidgetConfig textWidget;
-	char content[] = "Hello ST7789!";
-	textWidget.aligment = GRAPHICS_ALIGNMENT_CENTER;
-	textWidget.background.background.color[0] = 128;
-	textWidget.background.background.color[1] = 255;
-	textWidget.background.background.color[2] = 0;
-	textWidget.background.pos.coordinate = (St7789Coordinate) {0, 0};
-	textWidget.background.pos.size = (St7789Size) {320, 240};
-	textWidget.outline.width = 5;
-	textWidget.outline.color.color[0] = 0xF2;
-	textWidget.outline.color.color[1] = 0xF2;
-	textWidget.outline.color.color[2] = 0xF2;
-	textWidget.textConfig.font.fontColor.color[0] = 0;
-	textWidget.textConfig.font.fontColor.color[1] = 0;
-	textWidget.textConfig.font.fontColor.color[2] = 0;
-	textWidget.textConfig.font.fontPixel = 10;
-	textWidget.textConfig.content = content;
-	GraphicsDrawTextWidget(&tft7789, &textWidget);
-	*/
+	MainScreenInit(&tft7789);
 
 	for (;;) {
 		osDelay(1000);

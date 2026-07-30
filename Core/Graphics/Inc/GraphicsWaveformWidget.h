@@ -2,6 +2,7 @@
 #define GRAPHICS_INC_GRAPHICSWAVEFORMWIDGET_H_
 
 #include "Graphics.h"
+#include "GraphicsRectangleWidget.h"
 
 typedef struct{
 	GraphicsRectangleConfig *lines;
@@ -14,8 +15,8 @@ typedef struct{
 	GraphicsLineSet waveformPoints;
 } GraphicsWaveformWidgetConfig;
 
-void GraphicsWaveformInit(GraphicsWaveformWidgetConfig *waveform, uint16_t pointLenght);
-HAL_StatusTypeDef GraphicsWaveformDraw(St7789Config *config, GraphicsWaveformWidgetConfig *waveform);
+HAL_StatusTypeDef GraphicsWaveformInit(GraphicsWaveformWidgetConfig *waveform, uint16_t pointLenght);
+HAL_StatusTypeDef GraphicsDrawWaveformWidget(GraphicsWaveformWidgetConfig *waveform);
 
 
 #endif /* GRAPHICS_INC_GRAPHICSWAVEFORMWIDGET_H_ */

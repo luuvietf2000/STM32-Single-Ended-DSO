@@ -15,7 +15,7 @@ typedef struct{
 //--------------------------------------------------------------------------------//
 
 //This widget uses the basic drawing functions provided by Graphics.h by default.
-HAL_StatusTypeDef GraphicsDrawRectangleWidget(St7789Config *config, GraphicsRectangleWidgetConfig *rectangleConfig);
+HAL_StatusTypeDef GraphicsDrawRectangleWidget(GraphicsRectangleWidgetConfig *rectangleConfig);
 void GraphicsSetRectangleWidgetSize(GraphicsRectangleWidgetConfig *rectangleConfig, uint16_t column, uint16_t row);
 void GraphicsSetRectangleWidgetCoordinate(GraphicsRectangleWidgetConfig *rectangleConfig, uint16_t x, uint16_t y);
 void GraphicsSetRectangleWidgetColor(GraphicsRectangleWidgetConfig *rectangleConfig, uint8_t red, uint8_t green, uint8_t blue);

@@ -2,18 +2,18 @@
 #include "GraphicsTextWidget.h"
 
 //--------------------------------------------------------------------------------//
-static HAL_StatusTypeDef GraphicsDrawtextWidgetContent(St7789Config *config, GraphicsTextWidgetConfig *textConfig);
+static HAL_StatusTypeDef GraphicsDrawtextWidgetContent(GraphicsTextWidgetConfig *textConfig);
 
 //--------------------------------------------------------------------------------//
 
-HAL_StatusTypeDef GraphicsDrawTextWidget(St7789Config *config, GraphicsTextWidgetConfig *textConfig){
+HAL_StatusTypeDef GraphicsDrawTextWidget(GraphicsTextWidgetConfig *textConfig){
 	if(textConfig->outline.width == 0)
-		return GraphicsDrawText(config, textConfig->aligment, &textConfig->textConfig, &textConfig->background.pos, &textConfig->background.background);
-	return GraphicsDrawRectangleWidgetOutline(config, &textConfig->background, &textConfig->outline)
-			|| GraphicsDrawtextWidgetContent(config, textConfig);
+		return GraphicsDrawText(textConfig->aligment, &textConfig->textConfig, &textConfig->background.pos, &textConfig->background.background);
+	return GraphicsDrawRectangleWidgetOutline(&textConfig->background, &textConfig->outline)
+			|| GraphicsDrawtextWidgetContent(textConfig);
 }
 
-static HAL_StatusTypeDef GraphicsDrawtextWidgetContent(St7789Config *config, GraphicsTextWidgetConfig *textConfig){
+static HAL_StatusTypeDef GraphicsDrawtextWidgetContent(GraphicsTextWidgetConfig *textConfig){
 	GraphicsRegionWidgetConfig region;
 	region.size = (St7789Size) {
 		textConfig->background.pos.size.column - textConfig->outline.width * 2,
@@ -23,7 +23,7 @@ static HAL_StatusTypeDef GraphicsDrawtextWidgetContent(St7789Config *config, Gra
 		textConfig->outline.width,
 		textConfig->outline.width
 	};
-	return GraphicsDrawText(config, textConfig->aligment, &textConfig->textConfig, &region, &textConfig->background.background);
+	return GraphicsDrawText(textConfig->aligment, &textConfig->textConfig, &region, &textConfig->background.background);
 }
 
 

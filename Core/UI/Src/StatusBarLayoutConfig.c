@@ -1,0 +1,90 @@
+#ifndef UI_SRC_STATUSBARLAYOUTCONFIG_C_
+#define UI_SRC_STATUSBARLAYOUTCONFIG_C_
+
+#include "StatusBarLayoutConfig.h"
+
+GraphicsTextWidgetConfig voltagePerDivisionText = {
+	.aligment = VOLTAGE_PER_DIVISION_TEXT_WIDGET_ALIGNMENT,
+	.background = {
+		.pos = {
+			.size = {VOLTAGE_PER_DIVISION_TEXT_WIDGET_WIDTH, VOLTAGE_PER_DIVISION_TEXT_WIDGET_HEIGHT},
+			.coordinate = {VOLTAGE_PER_DIVISION_TEXT_WIDGET_X, VOLTAGE_PER_DIVISION_TEXT_WIDGET_Y}
+		},
+		.background = VOLTAGE_PER_DIVISION_TEXT_WIDGET_BACKGROUND_COLOR
+	},
+	.outline = {
+		.color = VOLTAGE_PER_DIVISION_TEXT_WIDGET_OUTLINE_COLOR,
+		.width = VOLTAGE_PER_DIVISION_TEXT_WIDGET_OUTLINE_WIDTH
+	},
+	.textConfig = {
+		.font = {
+			.fontPixel = VOLTAGE_PER_DIVISION_TEXT_WIDGET_FONT_SIZE,
+			.fontColor = VOLTAGE_PER_DIVISION_TEXT_WIDGET_FONT_COLOR
+		}
+	}
+};
+
+GraphicsTextWidgetConfig timePerDivisionText = {
+	.aligment = TIME_PER_DIVISION_TEXT_WIDGET_ALIGNMENT,
+	.background = {
+		.pos = {
+			.size = {TIME_PER_DIVISION_TEXT_WIDGET_WIDTH, TIME_PER_DIVISION_TEXT_WIDGET_HEIGHT},
+			.coordinate = {TIME_PER_DIVISION_TEXT_WIDGET_X, TIME_PER_DIVISION_TEXT_WIDGET_Y}
+		},
+		.background = TIME_PER_DIVISION_TEXT_WIDGET_BACKGROUND_COLOR
+	},
+	.outline = {
+		.color = TIME_PER_DIVISION_TEXT_WIDGET_OUTLINE_COLOR,
+		.width = TIME_PER_DIVISION_TEXT_WIDGET_OUTLINE_WIDTH
+	},
+	.textConfig = {
+		.font = {
+			.fontPixel = TIME_PER_DIVISION_TEXT_WIDGET_FONT_SIZE,
+			.fontColor = TIME_PER_DIVISION_TEXT_WIDGET_FONT_COLOR
+		}
+	}
+};
+
+GraphicsTextWidgetConfig acquisittionStatusText = {
+	.aligment = ACQUISITTION_STATUS_TEXT_WIDGET_ALIGNMENT,
+	.background = {
+		.pos = {
+			.size = {ACQUISITTION_STATUS_TEXT_WIDGET_WIDTH, ACQUISITTION_STATUS_TEXT_WIDGET_HEIGHT},
+			.coordinate = {ACQUISITTION_STATUS_TEXT_WIDGET_X, ACQUISITTION_STATUS_TEXT_WIDGET_Y}
+		},
+		.background = ACQUISITTION_STATUS_TEXT_WIDGET_BACKGROUND_COLOR
+	},
+	.outline = {
+		.color = ACQUISITTION_STATUS_TEXT_WIDGET_OUTLINE_COLOR,
+		.width = ACQUISITTION_STATUS_TEXT_WIDGET_OUTLINE_WIDTH
+	},
+	.textConfig = {
+		.font = {
+			.fontPixel = ACQUISITTION_STATUS_TEXT_WIDGET_FONT_SIZE,
+			.fontColor = ACQUISITTION_STATUS_TEXT_WIDGET_FONT_COLOR
+		}
+	}
+};
+
+GraphicsTextWidgetConfig zoomText = {
+	.aligment = ZOOM_MODE_TEXT_WIDGET_ALIGNMENT,
+	.background = {
+		.pos = {
+			.size = {ZOOM_MODE_TEXT_WIDGET_WIDTH, ZOOM_MODE_TEXT_WIDGET_HEIGHT},
+			.coordinate = {ZOOM_MODE_TEXT_WIDGET_X, ZOOM_MODE_TEXT_WIDGET_Y}
+		},
+		.background = ZOOM_MODE_TEXT_WIDGET_BACKGROUND_COLOR
+	},
+	.outline = {
+		.color = ZOOM_MODE_TEXT_WIDGET_OUTLINE_COLOR,
+		.width = ZOOM_MODE_TEXT_WIDGET_OUTLINE_WIDTH
+	},
+	.textConfig = {
+		.font = {
+			.fontPixel = ZOOM_MODE_TEXT_WIDGET_FONT_SIZE,
+			.fontColor = ZOOM_MODE_TEXT_WIDGET_FONT_COLOR
+		}
+	}
+};
+
+#endif /* UI_SRC_STATUSBARLAYOUTCONFIG_C_ */

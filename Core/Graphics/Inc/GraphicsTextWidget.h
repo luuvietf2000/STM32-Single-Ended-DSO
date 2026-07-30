@@ -15,7 +15,7 @@ typedef struct{
 //--------------------------------------------------------------------------------//
 
 //This widget uses the basic drawing functions provided by Graphics.h by default.
-HAL_StatusTypeDef GraphicsDrawTextWidget(St7789Config *config, GraphicsTextWidgetConfig *textConfig);
+HAL_StatusTypeDef GraphicsDrawTextWidget(GraphicsTextWidgetConfig *textConfig);
 
 //--------------------------------------------------------------------------------//
 
