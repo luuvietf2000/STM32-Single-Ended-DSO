@@ -66,25 +66,87 @@ GraphicsTextWidgetConfig acquisittionStatusText = {
 	}
 };
 
-GraphicsTextWidgetConfig zoomText = {
-	.aligment = ZOOM_MODE_TEXT_WIDGET_ALIGNMENT,
+GraphicsTextWidgetConfig zoomScaleText = {
+	.aligment = ZOOM_SCALE_TEXT_WIDGET_ALIGNMENT,
 	.background = {
 		.pos = {
-			.size = {ZOOM_MODE_TEXT_WIDGET_WIDTH, ZOOM_MODE_TEXT_WIDGET_HEIGHT},
-			.coordinate = {ZOOM_MODE_TEXT_WIDGET_X, ZOOM_MODE_TEXT_WIDGET_Y}
+			.size = {ZOOM_SCALE_TEXT_WIDGET_WIDTH, ZOOM_SCALE_TEXT_WIDGET_HEIGHT},
+			.coordinate = {ZOOM_SCALE_TEXT_WIDGET_X, ZOOM_SCALE_TEXT_WIDGET_Y}
 		},
-		.background = ZOOM_MODE_TEXT_WIDGET_BACKGROUND_COLOR
+		.background = ZOOM_SCALE_TEXT_WIDGET_BACKGROUND_COLOR
 	},
 	.outline = {
-		.color = ZOOM_MODE_TEXT_WIDGET_OUTLINE_COLOR,
-		.width = ZOOM_MODE_TEXT_WIDGET_OUTLINE_WIDTH
+		.color = ZOOM_SCALE_TEXT_WIDGET_OUTLINE_COLOR,
+		.width = ZOOM_SCALE_TEXT_WIDGET_OUTLINE_WIDTH
 	},
 	.textConfig = {
 		.font = {
-			.fontPixel = ZOOM_MODE_TEXT_WIDGET_FONT_SIZE,
-			.fontColor = ZOOM_MODE_TEXT_WIDGET_FONT_COLOR
+			.fontPixel = ZOOM_SCALE_TEXT_WIDGET_FONT_SIZE,
+			.fontColor = ZOOM_SCALE_TEXT_WIDGET_FONT_COLOR
 		}
 	}
 };
 
+GraphicsTextWidgetConfig triggerModeText = {
+	.aligment = TRIGGER_MODE_TEXT_WIDGET_ALIGNMENT,
+	.background = {
+		.pos = {
+			.size = {TRIGGER_MODE_TEXT_WIDGET_WIDTH, TRIGGER_MODE_TEXT_WIDGET_HEIGHT},
+			.coordinate = {TRIGGER_MODE_TEXT_WIDGET_X, TRIGGER_MODE_TEXT_WIDGET_Y}
+		},
+		.background = TRIGGER_MODE_TEXT_WIDGET_BACKGROUND_COLOR
+	},
+	.outline = {
+		.color = TRIGGER_MODE_TEXT_WIDGET_OUTLINE_COLOR,
+		.width = TRIGGER_MODE_TEXT_WIDGET_OUTLINE_WIDTH
+	},
+	.textConfig = {
+		.font = {
+			.fontPixel = TRIGGER_MODE_TEXT_WIDGET_FONT_SIZE,
+			.fontColor = TRIGGER_MODE_TEXT_WIDGET_FONT_COLOR
+		}
+	}
+};
+
+GraphicsTextWidgetConfig triggerEdgeText = {
+	.aligment = TRIGGER_EDGE_TEXT_WIDGET_ALIGNMENT,
+	.background = {
+		.pos = {
+			.size = {TRIGGER_EDGE_TEXT_WIDGET_WIDTH, TRIGGER_EDGE_TEXT_WIDGET_HEIGHT},
+			.coordinate = {TRIGGER_EDGE_TEXT_WIDGET_X, TRIGGER_EDGE_TEXT_WIDGET_Y}
+		},
+		.background = TRIGGER_EDGE_TEXT_WIDGET_BACKGROUND_COLOR
+	},
+	.outline = {
+		.color = TRIGGER_EDGE_TEXT_WIDGET_OUTLINE_COLOR,
+		.width = TRIGGER_EDGE_TEXT_WIDGET_OUTLINE_WIDTH
+	},
+	.textConfig = {
+		.font = {
+			.fontPixel = TRIGGER_EDGE_TEXT_WIDGET_FONT_SIZE,
+			.fontColor = TRIGGER_EDGE_TEXT_WIDGET_FONT_COLOR
+		}
+	}
+};
+
+GraphicsTextWidgetConfig triggerLevelText = {
+	.aligment = TRIGGER_LEVEL_TEXT_WIDGET_ALIGNMENT,
+	.background = {
+		.pos = {
+			.size = {TRIGGER_LEVEL_TEXT_WIDGET_WIDTH, TRIGGER_LEVEL_TEXT_WIDGET_HEIGHT},
+			.coordinate = {TRIGGER_LEVEL_TEXT_WIDGET_X, TRIGGER_LEVEL_TEXT_WIDGET_Y}
+		},
+		.background = TRIGGER_LEVEL_TEXT_WIDGET_BACKGROUND_COLOR
+	},
+	.outline = {
+		.color = TRIGGER_LEVEL_TEXT_WIDGET_OUTLINE_COLOR,
+		.width = TRIGGER_LEVEL_TEXT_WIDGET_OUTLINE_WIDTH
+	},
+	.textConfig = {
+		.font = {
+			.fontPixel = TRIGGER_LEVEL_TEXT_WIDGET_FONT_SIZE,
+			.fontColor = TRIGGER_LEVEL_TEXT_WIDGET_FONT_COLOR
+		}
+	}
+};
 #endif /* UI_SRC_STATUSBARLAYOUTCONFIG_C_ */

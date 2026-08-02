@@ -12,16 +12,12 @@
 #define ZOOM_MODE_DEFFAULT																			ZOOM_RESET
 #define ACQUISITTION_STATUS_MODE_DEFFAULT															ACQUISITTION_RUN
 
-
-//---------------------------------------------------------------------------------------------------------------------------//
-
-
 //---------------------------------------------------------------------------------------------------------------------------//
 extern GraphicsWaveformWidgetConfig waveform;
 extern GraphicsRectangleWidgetConfig mainScreen;
 
 //---------------------------------------------------------------------------------------------------------------------------//
-HAL_StatusTypeDef MainScreenInit(St7789Config *config);
+HAL_StatusTypeDef MainScreenInit();
 
 //---------------------------------------------------------------------------------------------------------------------------//
 #endif /* UI_INC_MAINSCREEN_H_ */

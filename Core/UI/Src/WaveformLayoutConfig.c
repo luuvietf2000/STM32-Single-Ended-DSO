@@ -181,10 +181,6 @@ GraphicsWaveformWidgetConfig waveform = {
 	.lineSet = {
 		.lines = waveformGridLines,
 		.count = sizeof(waveformGridLines) / sizeof(waveformGridLines[0])
-	},
-	.waveformPoints = {
-		.lines = NULL,
-		.count = 0
-    }
+	}
 };
 

@@ -9,7 +9,7 @@
 #define GRAPHICS_PIXEL_SPACE												1
 #define GRAPHICS_TEXT_COLUMN_SIZE_DEFFAULT									(FONT_DEFFAULT_COLUMN + GRAPHICS_PIXEL_SPACE)
 #define GRAPHICS_TEXT_ROW_SIZE_DEFFAULT										(FONT_DEFFAULT_ROW + GRAPHICS_PIXEL_SPACE)
-#define GRAPHICS_LEFT(parent, child)										(parent)
+#define GRAPHICS_LEFT(parent, child)										0
 #define GRAPHICS_CENTER(parent, child)										((parent - child) / 2)
 #define GRAPHICS_RIGHT(parent, child)										(parent - child)
 //-------------------------------------------------------------------------------//

@@ -4,6 +4,7 @@
 #include "Graphics.h"
 #include "GraphicsRectangleWidget.h"
 
+//-------------------------------------------------------------------------------------------------------------------//
 typedef struct{
 	GraphicsRectangleConfig *lines;
 	uint16_t count;
@@ -15,8 +16,13 @@ typedef struct{
 	GraphicsLineSet waveformPoints;
 } GraphicsWaveformWidgetConfig;
 
-HAL_StatusTypeDef GraphicsWaveformInit(GraphicsWaveformWidgetConfig *waveform, uint16_t pointLenght);
-HAL_StatusTypeDef GraphicsDrawWaveformWidget(GraphicsWaveformWidgetConfig *waveform);
 
+//-------------------------------------------------------------------------------------------------------------------//
+HAL_StatusTypeDef GraphicsDrawWaveformLineSetWidget(GraphicsWaveformWidgetConfig *waveform);
+HAL_StatusTypeDef GraphicsWaveformAllocateWaveformPoint(GraphicsWaveformWidgetConfig *waveform, uint16_t length);
+HAL_StatusTypeDef GraphicsWaveformAllocateLineSet(GraphicsWaveformWidgetConfig *waveform, uint16_t length);
+HAL_StatusTypeDef GraphicsDrawWaveformWidgetLineSet(GraphicsWaveformWidgetConfig *waveform);
+HAL_StatusTypeDef GraphicsDrawWaveformWidgetWavePoints(GraphicsWaveformWidgetConfig *waveform);
+//-------------------------------------------------------------------------------------------------------------------//
 
 #endif /* GRAPHICS_INC_GRAPHICSWAVEFORMWIDGET_H_ */

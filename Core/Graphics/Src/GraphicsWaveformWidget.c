@@ -2,21 +2,46 @@
 #include "GraphicsRectangleWidget.h"
 #include <stdlib.h>
 
-HAL_StatusTypeDef GraphicsWaveformInit(GraphicsWaveformWidgetConfig *waveform, uint16_t pointLenght){
-	waveform->waveformPoints.count = pointLenght;
-	waveform->waveformPoints.lines = malloc(pointLenght * sizeof(GraphicsRectangleConfig));
-	if(waveform->waveformPoints.lines == NULL)
+//-----------------------------------------------------------------------------------------------------------//
+static HAL_StatusTypeDef GraphicsWaveformAllocate(GraphicsLineSet *lines, uint16_t pointLenght);
+static HAL_StatusTypeDef GraphicsDrawLine(GraphicsLineSet *lines);
+//-----------------------------------------------------------------------------------------------------------//
+static HAL_StatusTypeDef GraphicsWaveformAllocate(GraphicsLineSet *lines, uint16_t length){
+	lines->count = length;
+	lines->lines = malloc(length * sizeof(GraphicsRectangleConfig));
+	if(lines->lines == NULL)
 		return HAL_ERROR;
 	return HAL_OK;
 }
 
-HAL_StatusTypeDef GraphicsDrawWaveformWidget(GraphicsWaveformWidgetConfig *waveform){
+HAL_StatusTypeDef GraphicsWaveformAllocateLineSet(GraphicsWaveformWidgetConfig *waveform, uint16_t length){
+	return GraphicsWaveformAllocate(&waveform->lineSet, length);
+}
+
+HAL_StatusTypeDef GraphicsWaveformAllocateWaveformPoint(GraphicsWaveformWidgetConfig *waveform, uint16_t length){
+	return GraphicsWaveformAllocate(&waveform->waveformPoints, length);
+}
+
+HAL_StatusTypeDef GraphicsDrawWaveformWidgetLineSet(GraphicsWaveformWidgetConfig *waveform){
 	HAL_StatusTypeDef result = HAL_OK;
 	result |= GraphicsDrawRectangleWidget(&waveform->background);
 	if(waveform->lineSet.lines != NULL){
-		for(uint16_t i = 0; i < waveform->lineSet.count; i++){
-			result |= GraphicsDrawRectangle(waveform->lineSet.lines + i);
-		}
+		GraphicsDrawLine(&waveform->lineSet);
+	}
+	return result;
+}
+
+HAL_StatusTypeDef GraphicsDrawWaveformWidgetWavePoints(GraphicsWaveformWidgetConfig *waveform){
+	if(waveform->waveformPoints.lines != NULL){
+		GraphicsDrawLine(&waveform->waveformPoints);
+	}
+	return HAL_ERROR;
+}
+
+static HAL_StatusTypeDef GraphicsDrawLine(GraphicsLineSet *lines){
+	HAL_StatusTypeDef result = HAL_OK;
+	for(uint16_t i = 0; i < lines->count; i++){
+		result |= GraphicsDrawRectangle(lines->lines + i);
 	}
 	return result;
 }
@@ -25,5 +50,5 @@ HAL_StatusTypeDef GraphicsWaveformUpdatePoint(GraphicsWaveformWidgetConfig *wave
 	if(pos >= waveform->waveformPoints.count)
 		return HAL_ERROR;
 	HAL_StatusTypeDef result;
-	return result;
+	return HAL_OK;
 }
